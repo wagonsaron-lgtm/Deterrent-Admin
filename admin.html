@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Admin Dashboard</title>
+    <!-- Firebase SDK (Compat Version) -->
+    <script src="https://www.gstatic.com/firebasejs/9.0.0/firebase-app-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/9.0.0/firebase-database-compat.js"></script>
+</head>
+<body>
+    <h1>Admin Panel - Urine Deterrent</h1>
+    
+    <!-- የአላርም መቆጣጠሪያ -->
+    <button onclick="triggerAlarm()" style="background: red; color: white; padding: 20px; font-size: 18px; cursor: pointer;">🚨 አላርም አሰማ!</button>
+    <button onclick="stopAlarm()" style="padding: 20px; font-size: 18px; cursor: pointer;">✅ አላርም አጥፋ!</button>
+
+    <script>
+        // የአንተ እውነተኛ Firebase Config መረጃዎች
+        const firebaseConfig = {
+            apiKey: "AIzaSyAQBSd2p8cQOEUyyzpnHRI7Dz04a3_Xudw",
+            authDomain: "offline-ai-urine-deterrent.firebaseapp.com",
+            projectId: "offline-ai-urine-deterrent",
+            storageBucket: "offline-ai-urine-deterrent.firebasestorage.app",
+            messagingSenderId: "110841636502",
+            appId: "1:110841636502:web:b9761e7ace8112967a44b7",
+            measurementId: "G-CHMWLBD2P7",
+            databaseURL: "https://offline-ai-urine-deterrent-default-rtdb.firebaseio.com/"
+        };
+        
+        // Firebase-ን ማስጀመር
+        firebase.initializeApp(firebaseConfig);
+        const db = firebase.database();
+
+        // አላርምን የሚያበራ ተግባር
+        function triggerAlarm() {
+            db.ref('alarmTrigger').set(true)
+                .then(() => console.log("አላርም ተከፍቷል!"))
+                .catch(err => console.error("ስህተት፦ ", err));
+        }
+
+        // አላርምን የሚያጠፋ ተግባር
+        function stopAlarm() {
+            db.ref('alarmTrigger').set(false)
+                .then(() => console.log("አላርም ጠፍቷል!"))
+                .catch(err => console.error("ስህተት፦ ", err));
+        }
+    </script>
+</body>
+</html>
